@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- ฟอร์มวิว -->
+        <record id="main_bot_view_form" model="ir.ui.view">
+            <field name="name">main.bot.view.form</field>
+            <field name="model">main.bot</field>
+            <field name="arch" type="xml">
+                <form string="ระบบอัตราแลกเปลี่ยน">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- ทรีวิว -->
+        <record id="main_bot_view_tree" model="ir.ui.view">
+            <field name="name">main.bot.view.tree</field>
+            <field name="model">main.bot</field>
+            <field name="arch" type="xml">
+                <tree string="ระบบอัตราแลกเปลี่ยน">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Action ที่เชื่อมกับวิว -->
+        <record id="main_bot_action" model="ir.actions.act_window">
+            <field name="name">อัตราแลกเปลี่ยน</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">main.bot</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- สร้างเมนูหลัก -->
+        <menuitem id="main_menu_bot" name="เมนูหลัก"/>
+
+        <!-- สร้างเมนูย่อยที่เชื่อมกับ Action -->
+        <menuitem id="main_bot_menu" name="อัตราแลกเปลี่ยน" parent="main_menu_bot" action="main_bot_action" sequence="1"/>
+    </data>
+</odoo>

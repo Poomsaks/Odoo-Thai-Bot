@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <template id="my_template" name="Test my_template">
+            <t t-call="website.layout">
+                <div>
+                    <h1>Hello, World!</h1>
+
+                    <form action="/my_website" method="GET">
+                        <label for="start_date">Start Date:</label>
+                        <input type="date" name="start_date" required="required"/>
+
+                        <label for="end_date">End Date:</label>
+                        <input type="date" name="end_date" required="required"/>
+
+                        <button type="submit">Submit</button>
+                    </form>
+
+                    <!-- API Data -->
+                    <t t-if="data">
+                        <h2>Report: <t t-esc="data['result']['api']"/></h2>
+                        <h3>Last Updated: <t t-esc="data['result']['data']['data_header']['last_updated']"/></h3>
+
+                        <h4>
+                            <t t-esc="data['result']['data']['data_header']['report_name_eng']"/>
+                            (<t t-esc="data['result']['data']['data_header']['report_name_th']"/>)
+                        </h4>
+
+                        <h5>
+                            <t t-esc="data['result']['data']['data_header']['report_uoq_name_eng']"/>
+                            (<t t-esc="data['result']['data']['data_header']['report_uoq_name_th']"/>)
+                        </h5>
+
+                        <h5>
+                            Source:
+                            <t t-esc="data['result']['data']['data_header']['report_source_of_data'][0]['source_of_data_eng']"/>
+                            (<t t-esc="data['result']['data']['data_header']['report_source_of_data'][0]['source_of_data_th']"/>)
+                        </h5>
+
+                        <h3>Exchange Rates:</h3>
+                        <ul>
+                            <t t-foreach="data['result']['data']['data_detail']" t-as="rate">
+                                <li>
+                                    <strong>Date:</strong> <t t-esc="rate['period']"/>,
+                                    <strong>Rate:</strong> <t t-esc="rate['rate']"/>
+                                </li>
+                            </t>
+                        </ul>
+                    </t>
+                    <t t-else="">
+                        <p>No data available.</p>
+                    </t>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>
